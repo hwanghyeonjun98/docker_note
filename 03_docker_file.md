@@ -113,3 +113,28 @@ CMD <commend> <param1> <param2> ...
 ```
 
 > CMD는 Dockerfile에 하나만 작성하기! 뒤에 더 작성하면 뒤에 CMD 명령으로 덮어씌어짐
+
+### 칸테이너 로그 보기
+
+```Docker
+docker logs [containerID|containerName]
+```
+
+### 컨테이너 즉시 증시
+- `docker stop`은 즉시 중단하지 않고, 실행 중인 단계까지 기다리다 중지
+- `docker kill`은 즉시 중단
+```Docker 
+docker kill [containerID|containerName]
+```
+
+### CMD 덮어씌우기
+- 컨테이너 생성 명령 후 맨뒤에 수정할 CMD 명령을 입력
+
+### ENTRYPOINT
+- `ENTRYPOINT`은 `docker run` 시에 함께 넣어지는 CMD 명량에 덮어씌어지지 않고, 반듯이 실행해야하는 명형을 기입할 떄 사용
+  - `docker run` 시 함께 넣어지는 명령 `ENTRYPOINT`에 작성된 명령의 인자로 넣어지게 됨
+  - `ENTRYPOINT`에 컨테이너 실행시, 반드시 실행해야되는 명형을 넣고, 별도로 각 켄테이너 생성시 필요한 인자는 `docker run`에 넣는 식으로 활용하기도 함
+
+### RUN
+- docker는 이미지 생성시, 각 단계를 layer로 나누어 작성
+- RUN명형어는 이미지 생성시, 일종의 layer를 만들수 있는 명령어로, 보통 베이스 이미지에 패키지를 설치하여 새로운 이미지를 만들 떄 많이 사용
