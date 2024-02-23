@@ -60,7 +60,7 @@ docker build [options] Dockerfile_dir
 | --pull      | FROM으로 지정된 이미지는 한번 다운로드 받으면, 이미지 생성시 마다 새로 다운받지 않고 다운로드 받은 이미지를 사용함.</br> 해당 옵션은 이미지 생성시마다 새로 다운받으라는 옵션임. `--pull=true`와 같이 작성하며, 사용함.</br> DockerHub에 베이스 이미지를 수시로 업데이트하고, 이를 기반으로 새로운 이미지 생성시 자주 사용할 수 있는 옵션 |
 
 ```Docker
-docker build [-t|--tag] imageName[:tag] [-f] [Dockerfile|/dir/fileName] [--pull=true]
+docker build [-t|--tag] imageName[:tag] [-f] [Dockerfile|fileName [filePathe]]  [--pull=true]
 ```
 
 ### LABEL
@@ -138,3 +138,27 @@ docker kill [containerID|containerName]
 ### RUN
 - docker는 이미지 생성시, 각 단계를 layer로 나누어 작성
 - RUN명형어는 이미지 생성시, 일종의 layer를 만들수 있는 명령어로, 보통 베이스 이미지에 패키지를 설치하여 새로운 이미지를 만들 떄 많이 사용
+
+### EXPOSE
+- docker 컨테이너 특정 포트를 외부에 오픈하는 설정 
+  - docker run -p 옵션과 달리 특정 포트를 외부에 오픈만 설정
+
+- `EXPOSE`로 오픈된 포트에 `-P(대문자)` 옵션을 넣으면 호스트 PC 포트가 랜덤하게 매칭된다.
+```Docker
+docker run -P -d myweb
+```
+
+### ENV
+- 컨테이너 환경변수 설정
+- 설정한 환경변수는 RUN, CMD, ENTRYPOINT 명령에도 적용됨
+
+### WORKDIR
+- RUN, CMD, ENTRYPOINT 명령이 실행될 디렉토리 설정
+
+```Docker
+FROM httpd:alpine
+
+WORKDIR /use/local/apache2/htdocs
+
+CMD /bin/cat index.html
+```
