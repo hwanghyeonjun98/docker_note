@@ -40,3 +40,10 @@ docker diff [containerID|containerNAME]
 |A| 파일또는 디렉토리 추가 |
 |D| 파일또는 디렉토리 삭제 |
 |C| 파일또는 디렉토리 변경 |
+
+
+## --link
+- 컨테이너 끼리 연결하기 위한 옵션
+```Docker
+--link containerName:conectContainerName
+```
